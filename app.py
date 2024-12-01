@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
 import numpy as np
@@ -29,6 +29,8 @@ def predict_weather(image_path):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
+        if 'imageFile' not in request.files:
+            return jsonify({'error': 'No image file provided'}), 400
         imageFile = request.files['imageFile']
         imagePath = os.path.join('./images', imageFile.filename)
         imageFile.save(imagePath)
@@ -49,4 +51,4 @@ def index():
     return render_template('index.html', prediction=prediction, confidence=confidence)
 
 if __name__ == '__main__':
-    app.run(port=3000, debug=True)
+    app.run()

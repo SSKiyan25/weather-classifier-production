@@ -30,7 +30,7 @@
             Wondering if it's sunny, cloudy, or rainy? Just picture the sky and get an accurate weather prediction.
         </p>
         <form class="p-3" action="/" method="post" enctype="multipart/form-data">
-            <input type="file" class="form-control mb-1" name="imageFile" id="imageFile" accept="image/*" onchange="checkFile()">
+            <input type="file" class="form-control mb-1" name="imageFile" id="imageFile" accept="image/*" onchange="checkFile()" required>
             <input class="btn btn-primary mt-1" type="submit" value="Predict Weather" id="submitBtn" disabled>
         </form>
         {% if prediction %}
